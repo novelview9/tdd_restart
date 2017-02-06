@@ -9,7 +9,7 @@ class ItemValidationTest(FunctionalTest):
         # Edith goes to the home page and accidentally tries to submit
         # an empty list item. She hits Enter on the empty input box
         self.browser.get(self.server_url)
-        self.get_item_input_box().send_keys('\n')
+        self.get_item_input_box().send_keys(' \n')
 
         # The home page refreshes, and there is an error message saying
         # that list items cannot be blank
@@ -21,7 +21,7 @@ class ItemValidationTest(FunctionalTest):
         self.check_for_row_in_list_table('1: Buy milk')
 
         # Perversely, she now decides to submit a second blank list item
-        self.get_item_input_box().send_keys('\n')
+        self.get_item_input_box().send_keys(' \n')
 
         # She receives a similar warning on the list page
         self.check_for_row_in_list_table('1: Buy milk')
@@ -52,7 +52,7 @@ class ItemValidationTest(FunctionalTest):
     def test_error_messages_are_cleared_on_input(self):
         # Edith starts a new list in a way that causes a validation error:
         self.browser.get(self.server_url)
-        self.get_item_input_box().send_keys('\n')
+        self.get_item_input_box().send_keys(' \n')
         error = self.get_error_element()
         self.assertTrue(error.is_displayed())
 
@@ -62,4 +62,3 @@ class ItemValidationTest(FunctionalTest):
         # She is pleased to see that the error message disappears
         error = self.get_error_element()
         self.assertFalse(error.is_displayed())
-
